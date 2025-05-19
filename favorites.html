@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Favoritos - Healthy Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+         <a href="index.html" class="logo">HealthyRecipes</a>
+         <nav id="main-nav">
+             <ul>
+                 <li><a href="index.html" class="nav-link">Inicio</a></li>
+                 <li><a href="recipes.html" class="nav-link">Recetas</a></li>
+                 <li class="user-only hidden"><a href="add-recipe.html" class="nav-link">Añadir Receta</a></li>
+                 <li class="user-only hidden"><a href="favorites.html" class="nav-link active">Favoritos</a></li>
+                 <li class="user-only hidden"><a href="my-recipes.html" class="nav-link">Mis Recetas</a></li>
+                 <li class="admin-only hidden"><a href="admin-recipes.html" class="nav-link">Admin Recetas</a></li>
+                 <li class="admin-only hidden"><a href="admin-users.html" class="nav-link">Admin Usuarios</a></li>
+             </ul>
+         </nav>
+         <div class="user-actions">
+             <a href="profile.html" id="profile-link" class="nav-link user-only hidden"><i class="fas fa-user"></i> Perfil</a>
+             <button id="logout-btn" class="btn btn-light btn-sm user-only hidden">Logout</button>
+         </div>
+     </header>
+
+    <main class="container">
+        <h1 class="page-title">Mis Recetas Favoritas</h1>
+        <div id="favorites-grid" class="card-grid grid-cols-3">
+                     </div>
+        <p id="no-results-message" style="text-align:center; margin-top: 2rem;">Aún no has guardado ninguna receta como favorita.</p>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 HealthyRecipes App.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

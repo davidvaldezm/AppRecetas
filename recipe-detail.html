@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Receta - Healthy Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+     <header class="header">
+         <a href="index.html" class="logo">HealthyRecipes</a>
+         <nav id="main-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="recipes.html" class="nav-link">Recetas</a></li>
+                <li class="user-only hidden"><a href="add-recipe.html" class="nav-link">Añadir Receta</a></li>
+                <li class="user-only hidden"><a href="favorites.html" class="nav-link">Favoritos</a></li>
+                <li class="admin-only hidden"><a href="admin-recipes.html" class="nav-link">Admin Recetas</a></li>
+                <li class="admin-only hidden"><a href="admin-users.html" class="nav-link">Admin Usuarios</a></li>
+            </ul>
+        </nav>
+         <div class="user-actions">
+              <a href="login.html" id="login-btn" class="btn btn-light btn-sm guest-only">Login</a>
+              <a href="register.html" id="register-btn" class="btn btn-secondary btn-sm guest-only">Registro</a>
+              <a href="profile.html" id="profile-link" class="nav-link user-only hidden"><i class="fas fa-user"></i> Perfil</a>
+              <button id="logout-btn" class="btn btn-light btn-sm user-only hidden">Logout</button>
+          </div>
+     </header>
+
+    <main class="container">
+        <div id="recipe-detail-container" class="recipe-detail-container">
+             </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 HealthyRecipes App.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

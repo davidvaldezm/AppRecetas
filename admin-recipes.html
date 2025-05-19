@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Recetas - Healthy Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body class="admin-only">
+    <header class="header">
+        <a href="index.html" class="logo">HealthyRecipes</a>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="recipes.html" class="nav-link">Recetas</a></li>
+                <li class="admin-only"><a href="admin-recipes.html" class="nav-link active">Admin Recetas</a></li>
+                <li class="admin-only"><a href="admin-users.html" class="nav-link">Admin Usuarios</a></li>
+           </ul>
+       </nav>
+        <div class="user-actions">
+            <span id="admin-welcome" style="margin-right: 1rem;">Admin</span>
+            <button id="logout-btn" class="btn btn-light btn-sm">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Gestión de Recetas</h1>
+        <a href="add-recipe.html" class="btn btn-primary" style="margin-bottom: 1.5rem;"><i class="fas fa-plus"></i> Añadir Nueva Receta</a>
+
+        <div class="filters-sidebar" style="position: static; width: 100%; margin-bottom: 2rem;">
+             <h3><i class="fas fa-filter"></i> Filtrar y Ordenar Recetas</h3>
+             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                 <div class="filter-group">
+                    <label for="admin-filter-search">Buscar por Nombre:</label>
+                    <input type="text" id="admin-filter-search" placeholder="Buscar...">
+                </div>
+                <div class="filter-group">
+                    <label for="admin-filter-category">Categoría:</label>
+                    <select id="admin-filter-category">
+                        <option value="">Todas</option>
+                        </select>
+                </div>
+                 <div class="filter-group">
+                     <label for="admin-filter-difficulty">Dificultad:</label>
+                     <select id="admin-filter-difficulty">
+                         <option value="">Todas</option>
+                         <option value="facil">Fácil</option>
+                         <option value="media">Media</option>
+                         <option value="dificil">Difícil</option>
+                     </select>
+                 </div>
+                  <div class="filter-group">
+                     <label for="admin-sort-by">Ordenar Por:</label>
+                     <select id="admin-sort-by">
+                         <option value="title">Nombre</option>
+                         <option value="calories">Calorías</option>
+                         <option value="time">Tiempo</option>
+                         <option value="difficulty">Dificultad</option>
+                     </select>
+                 </div>
+             </div>
+             <button id="admin-apply-filters-btn" class="btn btn-secondary btn-sm" style="margin-top: 1rem;">Aplicar</button>
+         </div>
+
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Tiempo</th>
+                    <th>Calorías</th>
+                    <th>Dificultad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="admin-recipes-table-body">
+                            </tbody>
+        </table>
+         <p id="no-results-message">No se encontraron recetas.</p>
+             </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 HealthyRecipes App.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Recetas - Healthy Recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Healthy Recipes</a>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Mis Recetas</h1>
+        <div id="recipes-grid" class="card-grid grid-cols-3"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Healthy Recipes. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const grid = document.getElementById("recipes-grid");
+
+            function loadRecipes() {
+                fetch("http://localhost:3000/recipes")
+                    .then(res => res.json())
+                    .then(data => {
+                        grid.innerHTML = "";
+                        if (data.length === 0) {
+                            grid.innerHTML = "<p>No hay recetas aún.</p>";
+                        } else {
+                            data.forEach(recipe => {
+                                const card = document.createElement("div");
+                                card.className = "recipe-card";
+                                card.innerHTML = `
+                                    <img src="${recipe.image}" alt="${recipe.title}">
+                                    <div class="recipe-card-content">
+                                        <h3 class="title">${recipe.title}</h3>
+                                        <p class="description">${recipe.description}</p>
+                                        <div class="details">
+                                            <span><i class="fa fa-clock"></i> ${recipe.time} min</span>
+                                            <span><i class="fa fa-fire"></i> ${recipe.calories} cal</span>
+                                        </div>
+                                        <div class="card-actions">
+                                            <button class="btn btn-secondary" onclick="editRecipe('${recipe.id}', this)">Editar</button>
+                                            <button class="btn btn-danger" onclick="deleteRecipe('${recipe.id}')">Eliminar</button>
+                                        </div>
+                                    </div>
+                                `;
+                                card.addEventListener("click", (e) => {
+    if (!e.target.closest(".card-actions")) {
+        showRecipeModal(recipe);
+    }
+});
+grid.appendChild(card);
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        grid.innerHTML = `<p>Error al cargar recetas: ${err.message}</p>`;
+                    });
+            }
+
+            window.editRecipe = (id, btn) => {
+    const card = btn.closest(".recipe-card-content");
+    const titleEl = card.querySelector(".title");
+    const descEl = card.querySelector(".description");
+
+    titleEl.contentEditable = true;
+    descEl.contentEditable = true;
+    btn.textContent = "Guardar";
+    btn.onclick = () => saveEditedRecipe(id, titleEl, descEl, btn);
+};
+
+function saveEditedRecipe(id, titleEl, descEl, btn) {
+    const title = titleEl.innerText;
+    const description = descEl.innerText;
+
+    fetch(`http://localhost:3000/admin/recipes/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "x-auth": "admin"
+        },
+        body: JSON.stringify({ title, description })
+    })
+    .then(res => res.ok ? alert("✅ Receta actualizada") : res.json().then(err => alert("Error: " + err.message)))
+    .then(() => {
+        titleEl.contentEditable = false;
+        descEl.contentEditable = false;
+        btn.textContent = "Editar";
+        btn.onclick = () => editRecipe(id, btn);
+    });
+};
+
+            window.deleteRecipe = (id) => {
+                if (!confirm("¿Estás seguro de eliminar esta receta?")) return;
+
+                fetch(`http://localhost:3000/admin/recipes/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "x-auth": "admin"
+                    }
+                })
+                .then(res => res.ok ? alert("🗑️ Receta eliminada") : res.json().then(err => alert("Error: " + err.message)))
+                .then(loadRecipes);
+            };
+
+            loadRecipes();
+        });
+    function showRecipeModal(recipe) {
+    document.getElementById("modal-title").innerText = recipe.title;
+    document.getElementById("modal-image").src = recipe.image;
+    document.getElementById("modal-description").innerText = recipe.description;
+    document.getElementById("modal-instructions").innerText = recipe.instructions;
+    const ingredientsList = document.getElementById("modal-ingredients");
+    ingredientsList.innerHTML = "";
+    (recipe.ingredients || []).forEach(ing => {
+        const li = document.createElement("li");
+        li.innerText = ing;
+        ingredientsList.appendChild(li);
+    });
+    document.getElementById("recipe-modal").style.display = "block";
+}
+</script>
+<div id="recipe-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('recipe-modal').style.display='none'">&times;</span>
+        <h2 id="modal-title"></h2>
+        <img id="modal-image" src="" alt="" style="width:100%; max-height:300px; object-fit:cover;">
+        <p id="modal-description"></p>
+        <h4>Ingredientes</h4>
+        <ul id="modal-ingredients"></ul>
+        <h4>Instrucciones</h4>
+        <p id="modal-instructions"></p>
+    </div>
+</div>
+</body>
+
+</html>

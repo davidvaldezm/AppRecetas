@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Usuarios - Healthy Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body class="admin-only">
+     <header class="header">
+         <a href="index.html" class="logo">HealthyRecipes</a>
+         <nav id="main-nav">
+             <ul>
+                 <li><a href="index.html" class="nav-link">Inicio</a></li>
+                 <li><a href="recipes.html" class="nav-link">Recetas</a></li>
+                 <li class="admin-only"><a href="admin-recipes.html" class="nav-link">Admin Recetas</a></li>
+                 <li class="admin-only"><a href="admin-users.html" class="nav-link active">Admin Usuarios</a></li>
+            </ul>
+        </nav>
+         <div class="user-actions">
+             <span id="admin-welcome" style="margin-right: 1rem;">Admin</span>
+             <button id="logout-btn" class="btn btn-light btn-sm">Logout</button>
+         </div>
+     </header>
+
+    <main class="container">
+        <h1 class="page-title">Gestión de Usuarios</h1>
+         <div style="margin-bottom: 1rem;">
+             <input type="text" id="user-search" placeholder="Buscar por nombre o email..." style="padding: 0.5rem; max-width: 300px;">
+         </div>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Nombre Completo</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body">
+                            </tbody>
+        </table>
+         <p id="no-results-message">No se encontraron usuarios.</p>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 HealthyRecipes App.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
